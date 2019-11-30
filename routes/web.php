@@ -17,3 +17,4 @@ Route::get('/', function () {
 
 
 Route::get('/test', 'NewsletterController@addSubscriber');
+Route::get('/test-mail', 'MailController@sendMail');

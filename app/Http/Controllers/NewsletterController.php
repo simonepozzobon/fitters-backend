@@ -8,16 +8,6 @@ class NewsletterController extends Controller
 {
     public function addSubscriber(Request $r)
     {
-        $checkbox = 1;
-        $name = uniqid();
-        $surname = uniqid();
-        $email = uniqid().'@email.com';
-        $request_fields = [
-                'ABBONAMENT' => 'Si, ho un abbonamento in palestra',
-                'NAME' => $name,
-                'SURNAME' => $surname
-        ];
-
         $MailChimp = new \DrewM\MailChimp\MailChimp(env('MAILCHIMP_AUTH'));
 
         $fields = json_decode($r->fields, true);
