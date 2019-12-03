@@ -18,3 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('newsletter', 'NewsletterController@addSubscriber');
+Route::post('send-mail', 'MailController@sendMail');
