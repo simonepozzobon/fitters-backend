@@ -49,26 +49,35 @@ class LoginController extends Controller
 
     public function register(Request $request)
     {
-        $user = new User();
-        $user->name = $request->name;
-        $user->surname = $request->surname;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->save();
+        $user = User::where('email', $request->email)->first();
 
-        $user_details = new UserDetail();
-        $user_details->user_id = $user->id;
-        $user_details->age = $request->age;
-        $user_details->address = $request->address;
-        $user_details->city = $request->city;
-        $user_details->save();
+        if ($user) {
+            return [
+                'success' => false,
+                'message' => 'same-email'
+            ];
+        } else {
+            $user = new User();
+            $user->name = $request->name;
+            $user->surname = $request->surname;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->save();
 
-        $user->details = $user->details;
+            $user_details = new UserDetail();
+            $user_details->user_id = $user->id;
+            $user_details->age = $request->age;
+            $user_details->address = $request->address;
+            $user_details->city = $request->city;
+            $user_details->save();
 
-        return [
-            'success' => true,
-            'user' => $user,
-            'details' => $user_details
-        ];
+            $user->details = $user->details;
+
+            return [
+                'success' => true,
+                'user' => $user,
+                'details' => $user_details
+            ];
+        }
     }
 }
