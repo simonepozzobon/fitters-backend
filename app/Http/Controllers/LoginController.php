@@ -8,12 +8,16 @@ use App\UserDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * LoginController class
+ */
+
 class LoginController extends Controller
 {
-    public function get_user(Request $request)
+    public function getUser(Request $request)
     {
         $user = Auth::user();
-        $user->details = $user->details;
+        $user->details = $user->details->first();
 
         return [
             'success' => true,

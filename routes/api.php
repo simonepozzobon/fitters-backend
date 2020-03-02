@@ -15,9 +15,10 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->group(
     function () {
-        Route::get('user', 'LoginController@get_user');
+        Route::get('user', 'LoginController@getUser');
     }
 );
+
 Route::post('register', 'LoginController@register');
 Route::post('login', 'LoginController@login');
 
