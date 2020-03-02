@@ -17,7 +17,8 @@ class LoginController extends Controller
     public function getUser(Request $request)
     {
         $user = Auth::user();
-        $user->details = $user->details->first();
+        $user->details = $user->details;
+        $user->subscriptions = $user->subscriptions;
 
         return [
             'success' => true,
@@ -35,6 +36,7 @@ class LoginController extends Controller
         if (Auth::attempt($loginData)) {
             $user = Auth::user();
             $user->details = $user->details;
+            $user->subscriptions = $user->subscriptions;
 
             $token = $user->createToken('MyApp')->accessToken;
 
