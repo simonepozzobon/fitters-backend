@@ -18,10 +18,10 @@ Route::middleware('auth:api')->group(
         Route::get('user', 'LoginController@get_user');
     }
 );
+Route::post('register', 'LoginController@register');
+Route::post('login', 'LoginController@login');
 
 Route::get('test-request', 'TestController@test');
 
 Route::post('newsletter', 'NewsletterController@addSubscriber');
 Route::post('send-mail', 'MailController@sendMail');
-
-Route::post('login', 'LoginController@login');
