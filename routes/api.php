@@ -22,6 +22,7 @@ Route::middleware('auth:api')->group(
 
         Route::prefix('profile')->group(
             function () {
+                Route::post('edit', 'ProfileController@update');
                 Route::prefix('subscriptions')->group(
                     function () {
                         Route::post('create', 'SubscriptionController@create');
