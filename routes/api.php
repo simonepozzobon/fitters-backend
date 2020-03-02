@@ -16,6 +16,16 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->group(
     function () {
         Route::get('user', 'LoginController@getUser');
+
+        Route::prefix('profile')->group(
+            function () {
+                Route::prefix('subscription')->group(
+                    function () {
+                        Route::post('create', 'SubscriptionController@create');
+                    }
+                );
+            }
+        );
     }
 );
 
