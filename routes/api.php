@@ -13,13 +13,26 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::post('login', 'LoginController@login')->name('login');
+Route::post('register', 'LoginController@register')->name('register');
+
 Route::middleware('auth:api')->group(
     function () {
-        Route::get('user', 'LoginController@get_user');
+        Route::get('user', 'LoginController@getUser');
+
+        Route::prefix('profile')->group(
+            function () {
+                Route::post('edit', 'ProfileController@update');
+                Route::prefix('subscriptions')->group(
+                    function () {
+                        Route::post('create', 'SubscriptionController@create');
+                    }
+                );
+            }
+        );
     }
 );
-Route::post('register', 'LoginController@register');
-Route::post('login', 'LoginController@login');
+
 
 Route::get('test-request', 'TestController@test');
 
